@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 session="hashed2test"
 
 tmux has-session -t hashed2test 2>/dev/null && tmux kill-session -t hashed2test 
