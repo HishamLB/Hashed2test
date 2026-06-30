@@ -5,6 +5,8 @@ session="hashed2test"
 tmux has-session -t hashed2test 2>/dev/null && tmux kill-session -t hashed2test 
 
 tmux new-session -d -s $session
+
+# Setup Server
 tmux rename-window -t 0 'Server'
 tmux pipe-pane -o -t "$session:0.0" 'cat >> output.log'
 
@@ -14,9 +16,10 @@ else
     tmux send-keys -t 'Server' "./hashed2nite server --port $2" C-m
 fi
 
+# number of players
 tmux send-keys -t 'Server' "$3" C-m
 
-
+# Setup Clients
 tmux new-window -t $session:1 -n 'Clients'
 tmux send-keys -t "$session:1.0" "./hashed2nite client $1" C-m
 
